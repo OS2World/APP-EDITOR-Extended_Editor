@@ -1,0 +1,249 @@
+
+/* OS/2 Warp 4.0 Resource Script File - Created by Universal Resource Editor */
+
+#define INCL_WINSYS
+#define INCL_WINBIDI
+#define INCL_WINSTDDLGS
+#define INCL_WINSTDSPIN
+#define INCL_NLS
+#define INCL_SW
+
+#include <os2.h>
+
+#include "res.h"
+
+BITMAP      M_File_New "images\\new.bmp"
+BITMAP      M_File_Open "images\\open.bmp"
+BITMAP      CITEM_FIRST "images\\save.bmp"
+BITMAP      M_File_Print "images\\print.bmp"
+BITMAP      M_Edit_Copy "images\\copy.bmp"
+BITMAP      M_Edit_Cut "images\\cut.bmp"
+BITMAP      M_Edit_Paste "images\\paste.bmp"
+BITMAP      M_Edit_Clear "images\\clear.bmp"
+BITMAP      M_Edit_Search "images\\search.bmp"
+BITMAP      M_File_Settings "images\\set.bmp"
+BITMAP      M_Help_About "images\\help.bmp"
+BITMAP      About "images\\about.bmp"
+ICON        1 "exedit.ico"
+ICON        2 "child.ico"
+MENU 1
+BEGIN
+
+    SUBMENU "~File",                   100, MIS_TEXT
+    BEGIN
+        MENUITEM "~New...",            M_File_New, MIS_TEXT
+        MENUITEM "~Open...",           M_File_Open, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Save...",           CITEM_FIRST, MIS_TEXT
+        MENUITEM "Save ~as...",        M_File_SaveAs, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Print",             M_File_Print, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Default Settings...", M_File_Settings, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Exit...",           M_File_Exit, MIS_TEXT
+    END
+
+    SUBMENU "~Edit",                   200, MIS_TEXT
+    BEGIN
+        MENUITEM "~Undo\Alt+Backspace", M_Edit_Undo, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "Cu~t\Shift+Del",     M_Edit_Cut, MIS_TEXT
+        MENUITEM "~Copy\Ctrl+Ins",     M_Edit_Copy, MIS_TEXT
+        MENUITEM "~Paste\Shift+Ins",   M_Edit_Paste, MIS_TEXT
+        MENUITEM "Cl~ear\Del",         M_Edit_Clear, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Search",            M_Edit_Search, MIS_TEXT
+        MENUITEM SEPARATOR
+        MENUITEM "~Settings...",       M_Edit_LocSet, MIS_TEXT
+    END
+
+    SUBMENU "~Window",                 M_Window, MIS_TEXT
+    BEGIN
+        MENUITEM "C~ascade",           M_Window_Cascade, MIS_TEXT
+        MENUITEM "~Horizontal Tile",   M_Window_HTile, MIS_TEXT
+        MENUITEM "~Vertical Tile",     M_Window_VTile, MIS_TEXT
+        MENUITEM "~Next",              M_Window_Next, MIS_TEXT
+        MENUITEM "~Close All",         CITEM_LAST, MIS_TEXT
+        MENUITEM SEPARATOR
+    END
+
+    SUBMENU "~Help",                   400, MIS_TEXT
+    BEGIN
+        MENUITEM "~About",             M_Help_About, MIS_TEXT
+    END
+END
+
+MENU M_Mle
+BEGIN
+    MENUITEM "~Undo\Alt+Backspace",    M_Edit_Undo, MIS_TEXT
+    MENUITEM SEPARATOR
+    MENUITEM "Cu~t\Shift+Del",         M_Edit_Cut, MIS_TEXT
+    MENUITEM "~Copy\Ctrl+Ins",         M_Edit_Copy, MIS_TEXT
+    MENUITEM "~Paste\Shift+Ins",       M_Edit_Paste, MIS_TEXT
+    MENUITEM "Cl~ear\Del",             M_Edit_Clear, MIS_TEXT
+    MENUITEM SEPARATOR
+    MENUITEM "~Search...",             M_Edit_Search, MIS_TEXT
+    MENUITEM SEPARATOR
+    MENUITEM "~Settings...",           M_Edit_LocSet, MIS_TEXT
+END
+
+DLGTEMPLATE Id_Settings
+BEGIN
+    DIALOG "Settings...", Id_Settings, 0, 0, 275, 192, FS_NOBYTEALIGN |
+                FS_SIZEBORDER | WS_CLIPSIBLINGS | WS_SAVEBITS, FCF_TITLEBAR |
+                FCF_SYSMENU | FCF_MINMAX
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    PRESPARAMS PP_USER, "9.WarpSans"
+    BEGIN
+        CONTROL "Sample",              M_File_New, 3, 50, 195, 139, WC_NOTEBOOK,
+                                            BKS_BACKPAGESBR | BKS_MAJORTABRIGHT |
+                                            BKS_POLYGONTABS |
+                                            BKS_STATUSTEXTCENTER |
+                                            BKS_TABTEXTLEFT | BKS_SPIRALBIND | 
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE | 2048
+        CONTROL "~Ok",                 DID_OK, 54, 20, 51, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "~Cancel",             DID_CANCEL, 111, 20, 51, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE Id_Set1
+BEGIN
+    DIALOG "Appareance", Id_Set1, 0, 0, 254, 137, FS_NOBYTEALIGN | NOT
+                FS_DLGBORDER | WS_CLIPSIBLINGS | WS_SAVEBITS
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    PRESPARAMS PP_USER, "10.System Proportional"
+    BEGIN
+        CONTROL "Read only",           Cb_ReadOnly, 15, 59, 85, 10, WC_BUTTON,
+                                            BS_AUTOCHECKBOX | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "Word wrap",           Cb_Wrap, 15, 48, 63, 10, WC_BUTTON,
+                                            BS_AUTOCHECKBOX | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "Tab stop",            Selected, 15, 29, 45, 8, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+        CONTROL "",                    Sb_Tabs, 17, 20, 35, 9, WC_SPINBUTTON,
+                                            SPBS_MASTER | SPBS_JUSTRIGHT |
+                                            SPBS_NUMERICONLY | SPBS_FASTSPIN |
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE Id_Set2
+BEGIN
+    DIALOG "Appareance", Id_Set2, 0, 0, 254, 137, FS_NOBYTEALIGN | NOT
+                FS_DLGBORDER | WS_CLIPSIBLINGS | WS_SAVEBITS
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    PRESPARAMS PP_USER, "10.System Proportional"
+    BEGIN
+        CONTROL "Text",                Cb_ReadOnly, 6, 8, 100, 40, WC_VALUESET,
+                                            VS_COLORINDEX | VS_BORDER |
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE
+                CTLDATA 8, 0, 4, 4
+        CONTROL "Text color",          M_File_Open, 6, 47, 45, 8, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+        CONTROL "Preview",             Cb_Wrap, 117, 7, 124, 56, WC_STATIC,
+                                            SS_GROUPBOX | DT_MNEMONIC |
+                                            WS_GROUP | WS_VISIBLE
+        CONTROL "Background color",    M_File_Exit, 7, 101, 77, 8, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+        CONTROL "Back",                Vs_Back, 6, 61, 100, 40, WC_VALUESET,
+                                            VS_COLORINDEX | VS_BORDER |
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE
+                CTLDATA 8, 0, 4, 4
+                PRESPARAMS PP_FONTNAMESIZE, "10.Helv"
+        CONTROL "Change ~Font",        Cb_Undo, 116, 79, 126, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE DLG_SEARCH
+BEGIN
+    DIALOG "Find Text", DLG_SEARCH, 54, 49, 225, 88, FS_NOBYTEALIGN |
+                FS_DLGBORDER | WS_CLIPSIBLINGS | WS_SAVEBITS | WS_VISIBLE,
+                FCF_TITLEBAR | FCF_SYSMENU
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    PRESPARAMS PP_USER, "10.System Proportional"
+    BEGIN
+        CONTROL "Find text",           M_File_New, 7, 78, 27, 7, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+        CONTROL "",                    Text, 8, 69, 143, 7, WC_ENTRYFIELD,
+                                            ES_AUTOSCROLL | ES_MARGIN |
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE
+                CTLDATA 8, 0, 0, 0
+        CONTROL "Replace text",        M_File_Open, 7, 56, 52, 8, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+        CONTROL "",                    M_File_Exit, 8, 48, 143, 7,
+                                            WC_ENTRYFIELD, ES_AUTOSCROLL |
+                                            ES_MARGIN | WS_GROUP | WS_TABSTOP |
+                                            WS_VISIBLE
+                CTLDATA 8, 0, 0, 0
+        CONTROL "~Find",               Find, 161, 52, 60, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "~Replace",            Vs_Back, 161, 38, 60, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "~Replace all",        ReplaceAll, 161, 24, 60, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL "~OK",                 DID_OK, 161, 66, 60, 14, WC_BUTTON,
+                                            BS_PUSHBUTTON | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL " Case sensitive",     M_File_Settings, 10, 25, 100, 10,
+                                            WC_BUTTON, BS_AUTOCHECKBOX |
+                                            WS_GROUP | WS_TABSTOP | WS_VISIBLE
+                PRESPARAMS PP_FONTNAMESIZE, "10.Helv"
+        CONTROL " Whole words",        Whole, 10, 15, 79, 10, WC_BUTTON,
+                                            BS_AUTOCHECKBOX | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+                PRESPARAMS PP_FONTNAMESIZE, "10.Helv"
+        CONTROL " Selected text",      Selected, 10, 5, 79, 10, WC_BUTTON,
+                                            BS_AUTOCHECKBOX | WS_GROUP |
+                                            WS_TABSTOP | WS_VISIBLE
+                PRESPARAMS PP_FONTNAMESIZE, "10.Helv"
+        CONTROL "Options",             Whole, 7, 3, 145, 40, WC_STATIC,
+                                            SS_GROUPBOX | DT_MNEMONIC |
+                                            WS_GROUP | WS_VISIBLE
+    END
+END
+
+DLGTEMPLATE DLG_ABOUT
+BEGIN
+    DIALOG "About ExEdit", DLG_ABOUT, 48, 43, 188, 120, FS_NOBYTEALIGN |
+                FS_DLGBORDER | WS_CLIPSIBLINGS | WS_SAVEBITS | WS_VISIBLE,
+                FCF_TITLEBAR | FCF_SYSMENU
+    PRESPARAMS PP_FONTNAMESIZE, "9.WarpSans"
+    PRESPARAMS PP_USER, "10.System Proportional"
+    BEGIN
+        CONTROL "~OK",                 DID_OK, 67, 6, 51, 11, WC_BUTTON,
+                                            BS_PUSHBUTTON | BS_DEFAULT |
+                                            WS_TABSTOP | WS_VISIBLE
+        CONTROL About ,            101, 29, 61, 17, 13, WC_STATIC,
+                                            SS_BITMAP | WS_GROUP | WS_VISIBLE
+        CONTROL "Extended Editor",     M_File_Open, 67, 42, 45, 8, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+                PRESPARAMS PP_FOREGROUNDCOLOR, 0x00ff0000
+        CONTROL "Beta Version 0.20  - 10/05/97", M_File_Settings, 44, 33, 94, 8,
+                                            WC_STATIC, SS_TEXT | DT_LEFT |
+                                            DT_TOP | DT_MNEMONIC | WS_GROUP |
+                                            WS_VISIBLE
+                PRESPARAMS PP_FOREGROUNDCOLOR, 0x00000000
+        CONTROL "By Pesenti Gritti Marco", Selected, 59, 24, 65, 9, WC_STATIC,
+                                            SS_TEXT | DT_LEFT | DT_TOP |
+                                            DT_MNEMONIC | WS_GROUP | WS_VISIBLE
+                PRESPARAMS PP_FOREGROUNDCOLOR, 0x00ff0000
+    END
+END
+
